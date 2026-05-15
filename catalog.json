@@ -1,0 +1,43 @@
+[
+        {
+        "groupName": "[新! 1.2新增]",
+        "items": [
+            { "id": "n1", "name": "[剧情] 再引来春系列", "price": 20, "maxQty": 1 },
+            { "id": "n2", "name": "[剧情支线] 分忧解难", "price": 15, "maxQty": 1 },
+            { "id": "n3", "name": "[收集] 试验园区地图探索", "price": 40, "maxQty": 1 },
+            { "id": "n4", "name": "[电线] 拉线", "price": 10, "maxQty": 1 },
+            { "id": "n5", "name": "[滑索] 滑索 金材料点 送货滑索", "price": 15, "maxQty": 1 },
+            { "id": "n6", "name": "[基建] 进度许1.2毕业(具体看账号进度)", "price": 5, "maxQty": 1 }
+        ]
+    },
+    {
+        "groupName": "[日常 / Month]",
+        "items": [
+            { "id": "r1", "name": "[托管小托] 日常任务+周常任务+帝江收菜+倒货+调度商店+环境监测+清信用点商店+清理智", "price": 60, "maxQty": 12 },
+            { "id": "r2", "name": "[托管大托] <小托>全部内容+送货(需武陵滑索)+限时活动保证不亏玉", "price": 80, "maxQty": 12 }
+        ]
+    },
+    {
+        "groupName": "[常驻活动]",
+        "items": [
+            { "id": "c1", "name": "[蚀像寻遗] 满刻度 全宝箱收集 全清任务 ", "price": 100, "maxQty": 1 },
+            { "id": "c2", "name": "[秘境行者] 1期每关", "price": 3, "maxQty": 9 },
+            { "id": "c3", "name": "[秘境行者] 2期每关", "price": 5, "maxQty": 6 }
+        ]
+    },
+        {
+        "groupName": "[基建]",
+        "items": [
+            { "id": "j1", "name": "[电线] 四号谷地", "price": 58, "maxQty": 1 },
+            { "id": "j2", "name": "[电线] 武陵", "price": 58, "maxQty": 1 }
+        ]
+    },
+    {
+        "groupName": "[收集]",
+        "items": [
+            { "id": "s1", "name": "[收集] 四号谷地", "price": 178, "maxQty": 1 },
+            { "id": "s2", "name": "[收集] 武陵", "price": 228, "maxQty": 1 }
+        ]
+    }
+    
+]
