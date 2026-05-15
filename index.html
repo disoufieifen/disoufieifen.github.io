@@ -1,1 +1,398 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pricing System</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --bg: #000000;
+            --fg: #ffffff;
+            --dim: #444444;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .panel {
+            padding: 20px;
+            flex: 1;
+            min-width: 320px;
+            background: var(--bg);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: var(--bg);
+            border: 1px solid var(--dim);
+            color: var(--fg);
+            font-family: inherit;
+            box-sizing: border-box;
+            outline: none;
+        }
+        input:focus { border-color: var(--fg); }
+        .group { margin-bottom: 20px; }
+        .group-header {
+            cursor: pointer;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--dim);
+            display: flex;
+            justify-content: space-between;
+        }
+        .group-header:hover { background: #111; }
+        .group-content { display: none; }
+        .group.active .group-content { display: block; }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--dim);
+        }
+        .item:last-child { border-bottom: none; }
+        .item.highlight {
+            background-color: rgba(0, 255, 0, 0.2);
+        }
+        .item-name {
+            flex: 1;
+            text-align: left;
+        }
+        .item-price {
+            width: 80px;
+            text-align: right;
+            margin-right: 15px;
+        }
+        button {
+            background: var(--bg);
+            color: var(--fg);
+            border: 1px solid var(--dim);
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background: var(--fg);
+            color: var(--bg);
+        }
+        .flex-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        hr { border: none; border-top: 1px solid var(--dim); margin: 20px 0; }
+        .header-title { font-size: 20px; font-weight: bold; border-bottom: 1px solid var(--fg); padding-bottom: 10px; margin-bottom: 20px; }
+        .total-price {
+            font-size: 16px;
+            text-align: right;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid var(--dim);
+        }
+        [data-html2canvas-ignore] { display: inline-block; }
+        
+        /* 新增：抽离内联样式 */
+        .app-header { max-width: 1100px; margin: 0 auto 30px auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .app-title { margin: 0; font-size: 2rem; background: linear-gradient(45deg, var(--primary-color, #4b4b4b), #fcfcfc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; font-weight: 800; }
+        .export-area { padding: 10px; background-color: var(--bg); }
+        .export-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .export-header h2 { margin-bottom: 0; }
+        .btn-export { background-color: #10b981; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2); border-color: #10b981; }
+        .btn-export:hover { background-color: #059669; }
+        .empty-cart { color: #777777; text-align: center; padding: 20px 0; margin: 0; }
+        .cart-item-detail { font-size: 0.9em; color: #888; }
+        .cart-item-actions { display: flex; align-items: center; gap: 16px; }
+        .cart-item-total { font-size: 1.1em; }
+        .btn-danger { padding: 6px 12px; font-size: 0.85rem; width: 90px; }
+
+        @keyframes flashGreen {
+            0%, 100% { background-color: var(--bg); }
+            50% { background-color: rgba(0, 255, 0, 0.2); }
+        }
+        .flash-success { animation: flashGreen 0.5s ease-out; }
+    </style>
+</head>
+<body>
+
+<header class="app-header">
+    <h1 class="app-title">
+        ef 1.2 wechat@shiro333
+    </h1>
+</header>
+
+<main class="container">
+    <!-- 左侧：项目选择与搜索 -->
+    <section class="panel">
+        <h2>AVAILABLE ITEMS</h2>
+        <input type="text" id="searchInput" class="search-box" placeholder="SEARCH ITEMS..." oninput="filterItems()">
+        <div id="catalogContainer"></div>
+    </section>
+
+    <!-- 右侧：已选项目、总价与计价码 -->
+    <aside class="panel">
+        <div id="exportArea" class="export-area">
+            <header class="export-header">
+                <h2>SELECTED ITEMS (INVOICE)</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn" style="width: 90px;" data-html2canvas-ignore="true" onclick="clearCart()">CLEAR</button>
+                    <button class="btn btn-export" style="width: 90px;" data-html2canvas-ignore="true" onclick="exportToImage()">EXPORT</button>
+                </div>
+            </header>
+            <div id="cartContainer">
+                <p class="empty-cart">NO ITEMS SELECTED</p>
+            </div>
+            <div class="total-price" id="totalPrice">TOTAL: ¥0.00</div>
+        </div>
+
+        <section class="code-section">
+            <h3>PRICING CODE</h3>
+            <div class="flex-row">
+                <input type="text" id="generatedCode" class="code-input" placeholder="GENERATED CODE WILL APPEAR HERE" readonly>
+                <button class="btn" onclick="copyCode()">COPY</button>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 20px 0;">
+            
+            <div class="flex-row">
+                <input type="text" id="loadCodeInput" class="code-input" placeholder="ENTER PRICING CODE...">
+                <button class="btn" onclick="loadFromCode()">LOAD</button>
+            </div>
+        </section>
+    </aside>
+</main>
+
+<script>
+    // 1. 数据配置 (动态加载)
+    let catalogData = [];
+    let itemMap = {};
+
+    // 2. 全局状态与辅助函数
+    let cart = {};
+    const getEl = id => document.getElementById(id);
+
+    // 3. 渲染左侧列表 (重构为 map 形式，避免多次修改 DOM)
+    function renderCatalog(searchQuery = '') {
+        const query = searchQuery.toLowerCase().trim();
+        const isSearch = query !== '';
+
+        const html = catalogData.map(group => {
+            const groupMatch = group.groupName.toLowerCase().includes(query);
+            const filteredItems = group.items.filter(item => 
+                groupMatch || item.name.toLowerCase().includes(query)
+            );
+
+            if (filteredItems.length === 0) return '';
+
+            const itemsHtml = filteredItems.map(item => {
+                const itemMatch = item.name.toLowerCase().includes(query);
+                const highlightClass = (isSearch && (groupMatch || itemMatch)) ? ' highlight' : '';
+                return `
+                    <div class="item${highlightClass}">
+                        <span class="item-name">${item.name}</span> <span class="item-price">¥${item.price}</span>
+                        <button class="btn" onclick="addToCart('${item.id}')">ADD</button>
+                    </div>
+                `;
+            }).join('');
+
+            const isActive = isSearch ? 'active' : '';
+            return `
+                <div class="group ${isActive}">
+                    <div class="group-header" onclick="this.parentElement.classList.toggle('active')">
+                        <h3>${group.groupName}</h3>
+                        <span class="icon">▼</span>
+                    </div>
+                    <div class="group-content"><div class="group-inner">
+                        ${itemsHtml}
+                    </div></div>
+                </div>
+            `;
+        }).join('');
+        
+        getEl('catalogContainer').innerHTML = html;
+    }
+
+    const filterItems = () => renderCatalog(getEl('searchInput').value);
+
+    // 4. 购物车逻辑
+    function addToCart(id) {
+        const item = itemMap[id];
+        if (!item) return;
+
+        const currentQty = cart[id] || 0;
+        if (currentQty >= (item.maxQty || Infinity)) return; // 超出最大限制
+        
+        cart[id] = currentQty + 1;
+        updateCartUI();
+    }
+
+    function removeFromCart(id) {
+        if (!cart[id]) return;
+        if (--cart[id] <= 0) delete cart[id];
+        updateCartUI();
+    }
+
+    function clearCart() {
+        cart = {};
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const cartKeys = Object.keys(cart);
+        
+        if (cartKeys.length === 0) {
+            getEl('cartContainer').innerHTML = '<p class="empty-cart">NO ITEMS SELECTED</p>';
+            getEl('totalPrice').innerText = `TOTAL: ¥0.00`;
+            getEl('generatedCode').value = ''; 
+            return;
+        }
+
+        let total = 0;
+        const compactData = [];
+
+        const html = cartKeys.map(id => {
+            const qty = cart[id];
+            const item = itemMap[id];
+            if (!item) return '';
+
+            const itemTotal = item.price * qty;
+            total += itemTotal;
+            const maxLabel = qty >= (item.maxQty || Infinity) ? ' MAX' : '';
+            compactData.push(`${id}:${qty}`);
+
+            return `
+                <div class="cart-item item">
+                    <div class="item-name">
+                        <strong>${item.name}</strong> <br>
+                        <span class="cart-item-detail">¥${item.price} × ${qty}${maxLabel}</span>
+                    </div>
+                    <div class="cart-item-actions">
+                        <strong class="item-price cart-item-total">¥${itemTotal}</strong>
+                        <button class="btn btn-danger" onclick="removeFromCart('${id}')">REMOVE</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        getEl('cartContainer').innerHTML = html;
+        getEl('totalPrice').innerText = `TOTAL: ¥${total.toLocaleString()}`;
+        
+        getEl('generatedCode').value = btoa(compactData.join(','));
+    }
+
+    // 5. 复制计价码
+    function copyCode() {
+        const codeInput = getEl('generatedCode');
+        if (!codeInput.value) return;
+        
+        codeInput.select();
+        document.execCommand('copy'); // 自动尝试复制到剪贴板
+        
+        // 添加绿色闪烁动画特效
+        codeInput.classList.add('flash-success');
+        setTimeout(() => codeInput.classList.remove('flash-success'), 500);
+    }
+
+    // 6. 解析读取计价码
+    function loadFromCode() {
+        const inputCodeEl = getEl('loadCodeInput');
+        const inputCode = inputCodeEl.value.trim();
+        if (!inputCode) return;
+
+        try {
+            const decodedStr = atob(inputCode);
+            let importData = [];
+            
+            // 兼容旧版的 JSON 数组格式和新版的紧凑格式
+            if (decodedStr.startsWith('[')) {
+                importData = JSON.parse(decodedStr);
+            } else {
+                importData = decodedStr.split(',').map(pair => {
+                    const parts = pair.split(':');
+                    return [parts[0], parseInt(parts[1], 10)];
+                });
+            }
+
+            // 清空当前购物车
+            cart = {};
+            
+            let hasValidItem = false;
+            importData.forEach(entry => {
+                const id = entry[0];
+                const qty = entry[1];
+                // 验证 ID 是否存在且数量合法
+                if (itemMap[id] && typeof qty === 'number' && qty > 0) {
+                    const max = itemMap[id].maxQty || Infinity;
+                    cart[id] = Math.min(qty, max);
+                    hasValidItem = true;
+                }
+            });
+
+            if (hasValidItem) {
+                updateCartUI();
+                
+                // 添加绿色闪烁动画特效
+                inputCodeEl.classList.add('flash-success');
+                setTimeout(() => inputCodeEl.classList.remove('flash-success'), 500);
+            }
+
+        } catch (error) {
+            console.warn('Failed to parse pricing code:', error);
+        }
+    }
+
+    // 7. 初始化运行
+    window.onload = async () => {
+        try {
+            // 请求同目录下的 catalog.json 文件
+            const response = await fetch('./catalog.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            catalogData = await response.json();
+            
+            // 数据加载完成后，构建 Map
+            itemMap = Object.fromEntries(
+                catalogData.flatMap(group => group.items.map(item => [item.id, item]))
+            );
+            
+            // 渲染左侧列表
+            renderCatalog();
+        } catch (error) {
+            console.error('Failed to load catalog data:', error);
+            getEl('catalogContainer').innerHTML = '<p class="empty-cart" style="color: #ef4444;">[ERROR] Failed to load catalog.json</p>';
+        }
+    };
+
+    // 8. 导出图片功能
+    function exportToImage() {
+        if (Object.keys(cart).length === 0) return;
+        
+        const exportArea = getEl('exportArea');
+        
+        // 使用 html2canvas 渲染指定区域
+        html2canvas(exportArea, {
+            scale: 2, // 提高导出图片的清晰度 (2x 分辨率)
+            backgroundColor: '#000000',
+            useCORS: true // 允许跨域
+        }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            link.download = `${dateStr}.png`;
+            link.href = imgData;
+            link.click();
+        });
+    }
+</script>
+</body>
+</html>
