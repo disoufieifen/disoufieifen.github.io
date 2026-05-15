@@ -5,9 +5,9 @@
             { "id": "n1", "name": "[剧情] 再引来春系列", "price": 20, "maxQty": 1 },
             { "id": "n2", "name": "[剧情支线] 分忧解难", "price": 15, "maxQty": 1 },
             { "id": "n3", "name": "[收集] 试验园区地图探索", "price": 40, "maxQty": 1 },
-            { "id": "n4", "name": "[电线] 拉线", "price": 10, "maxQty": 1 },
-            { "id": "n5", "name": "[滑索] 滑索 金材料点 送货滑索", "price": 15, "maxQty": 1 },
-            { "id": "n6", "name": "[基建] 进度许1.2毕业(具体看账号进度)", "price": 5, "maxQty": 1 }
+            { "id": "n4", "name": "[电线] 试验园区拉线", "price": 10, "maxQty": 1 },
+            { "id": "n5", "name": "[滑索] 试验园区滑索 金材料点 送货滑索", "price": 15, "maxQty": 1 },
+            { "id": "n6", "name": "[基建] 进度需1.2毕业(具体看账号进度)", "price": 5, "maxQty": 1 }
         ]
     },
     {
