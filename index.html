@@ -67,7 +67,7 @@
         }
         .item:last-child { border-bottom: none; }
         .item.highlight {
-            background-color: rgba(0, 255, 0, 0.2);
+            background-color: rgba(0, 255, 0, 0.4);
         }
         .item-name {
             flex: 1;
@@ -122,6 +122,67 @@
             50% { background-color: rgba(0, 255, 0, 0.2); }
         }
         .flash-success { animation: flashGreen 0.5s ease-out; }
+
+        /* 新增此处：统一左右两个主面板大栏头（标题）的高度和对齐方式 */
+        .panel > h2, .export-header, .code-section h3 {
+            min-height: 48px; /* 修改此处：控制大栏头的高度 */
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* 购物车里的主/子分组标题样式 */
+        .cart-main-header {
+            font-size: 0.9em;
+            color: #cccccc; /* 将大表头的颜色调亮，与子表头拉开层次 */
+            margin: 15px 0 5px 0;
+        }
+        .cart-sub-header {
+            font-size: 0.9em;
+            color: #888;
+            margin: 10px 0 5px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px dashed var(--dim);
+        }
+        #cartContainer .cart-main-header:first-child { margin-top: 0; }
+
+        /* 新增：分子组样式 */
+        .subgroup {
+            margin-top: 5px;
+            border-left: 2px solid var(--dim);
+            padding-left: 10px;
+            padding-bottom: 5px;
+        }
+        .subgroup.highlight {
+            background-color: rgba(0, 255, 0, 0.25); /* 搜索时让整个分子组大栏背景呈现透明绿色 */
+        }
+        .subgroup-title {
+            font-size: 0.9em;
+            color: #aaaaaa;
+            margin: 10px 0 5px 0;
+        }
+        .subgroup-items-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .subgroup-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            background: var(--bg);
+            border: 1px solid var(--dim);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .subgroup-item:hover { border-color: var(--fg); }
+        .subgroup-item.selected {
+            background-color: rgba(0, 255, 0, 0.35);
+            border-color: #00ff00;
+        }
     </style>
 </head>
 <body>
@@ -187,26 +248,58 @@
         const query = searchQuery.toLowerCase().trim();
         const isSearch = query !== '';
 
-        const html = catalogData.map(group => {
+        const html = catalogData.map((group, index) => {
             const groupMatch = group.groupName.toLowerCase().includes(query);
-            const filteredItems = group.items.filter(item => 
-                groupMatch || item.name.toLowerCase().includes(query)
-            );
+            
+            let itemsHtml = '';
+            let hasVisibleItems = false;
 
-            if (filteredItems.length === 0) return '';
+            // 1. 渲染主组里的直属商品
+            if (group.items && group.items.length > 0) {
+                const filteredItems = group.items.filter(item => 
+                    groupMatch || item.name.toLowerCase().includes(query)
+                );
+                if (filteredItems.length > 0) {
+                    hasVisibleItems = true;
+                    itemsHtml += filteredItems.map(item => {
+                        const itemMatch = item.name.toLowerCase().includes(query);
+                        const highlightClass = (isSearch && (groupMatch || itemMatch)) ? ' highlight' : '';
+                        return `
+                            <div class="item${highlightClass}">
+                                <span class="item-name">${item.name}</span> <span class="item-price">¥${item.price}</span>
+                                <button class="btn" onclick="addToCart('${item.id}')">ADD</button>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
 
-            const itemsHtml = filteredItems.map(item => {
-                const itemMatch = item.name.toLowerCase().includes(query);
-                const highlightClass = (isSearch && (groupMatch || itemMatch)) ? ' highlight' : '';
-                return `
-                    <div class="item${highlightClass}">
-                        <span class="item-name">${item.name}</span> <span class="item-price">¥${item.price}</span>
-                        <button class="btn" onclick="addToCart('${item.id}')">ADD</button>
-                    </div>
-                `;
-            }).join('');
+            // 2. 渲染分子组 (subgroups) 的商品
+            if (group.subgroups && group.subgroups.length > 0) {
+                itemsHtml += group.subgroups.map(sub => {
+                    const subMatch = sub.subgroupName.toLowerCase().includes(query);
+                    const filteredSubItems = sub.items.filter(item => 
+                        groupMatch || subMatch || item.name.toLowerCase().includes(query)
+                    );
+                    if (filteredSubItems.length === 0) return '';
+                    
+                    hasVisibleItems = true;
+                    const subItemsHtml = filteredSubItems.map(item => {
+                        const selectedClass = cart[item.id] ? ' selected' : '';
+                        return `
+                            <div class="subgroup-item${selectedClass}" data-id="${item.id}" onclick="toggleItem('${item.id}')">
+                                ${item.name} ¥${item.price}
+                            </div>
+                        `;
+                    }).join('');
+                    const subgroupHighlight = isSearch ? ' highlight' : '';
+                    return `<div class="subgroup${subgroupHighlight}"><div class="subgroup-title">${sub.subgroupName}</div><div class="subgroup-items-container">${subItemsHtml}</div></div>`;
+                }).join('');
+            }
 
-            const isActive = isSearch ? 'active' : '';
+            if (!hasVisibleItems) return '';
+
+            const isActive = (isSearch || index === 0) ? 'active' : '';
             return `
                 <div class="group ${isActive}">
                     <div class="group-header" onclick="this.parentElement.classList.toggle('active')">
@@ -226,6 +319,15 @@
     const filterItems = () => renderCatalog(getEl('searchInput').value);
 
     // 4. 购物车逻辑
+    function toggleItem(id) {
+        if (cart[id]) {
+            delete cart[id];
+            updateCartUI();
+        } else {
+            addToCart(id);
+        }
+    }
+
     function addToCart(id) {
         const item = itemMap[id];
         if (!item) return;
@@ -249,8 +351,21 @@
     }
 
     function updateCartUI() {
-        const cartKeys = Object.keys(cart);
+        let cartKeys = Object.keys(cart);
         
+        // 按左侧列表(catalog.json)的原始顺序对购物车内的商品进行排序
+        cartKeys.sort((a, b) => {
+            const indexA = itemMap[a] ? itemMap[a].sortIndex : 0;
+            const indexB = itemMap[b] ? itemMap[b].sortIndex : 0;
+            return indexA - indexB;
+        });
+
+        // 同步左侧子组复选框的选中高亮状态
+        document.querySelectorAll('.subgroup-item').forEach(el => {
+            if (cart[el.dataset.id]) el.classList.add('selected');
+            else el.classList.remove('selected');
+        });
+
         if (cartKeys.length === 0) {
             getEl('cartContainer').innerHTML = '<p class="empty-cart">NO ITEMS SELECTED</p>';
             getEl('totalPrice').innerText = `TOTAL: ¥0.00`;
@@ -260,30 +375,56 @@
 
         let total = 0;
         const compactData = [];
+        let html = '';
 
-        const html = cartKeys.map(id => {
-            const qty = cart[id];
+        // 1. 树状层级归类：先按 [大组] 归类，再按 [分子组] 归类
+        const groupedItems = {};
+        cartKeys.forEach(id => {
             const item = itemMap[id];
-            if (!item) return '';
+            if (!item) return;
+            
+            const mainGroup = item.group || "未分类";
+            const subGroup = item.subgroup || '_direct_'; // _direct_ 代表直属于大组的商品
+            
+            if (!groupedItems[mainGroup]) groupedItems[mainGroup] = {};
+            if (!groupedItems[mainGroup][subGroup]) groupedItems[mainGroup][subGroup] = [];
+            
+            groupedItems[mainGroup][subGroup].push({ id, qty: cart[id], item });
+        });
 
-            const itemTotal = item.price * qty;
-            total += itemTotal;
-            const maxLabel = qty >= (item.maxQty || Infinity) ? ' MAX' : '';
-            compactData.push(`${id}:${qty}`);
+        // 2. 渲染树状列表
+        for (const [mainGroup, subGroups] of Object.entries(groupedItems)) {
+            // 渲染大组头（无分割线）
+            html += `<div class="cart-main-header">${mainGroup}</div>`;
+            
+            for (const [subGroup, items] of Object.entries(subGroups)) {
+                // 如果是分子组，则渲染子组头（带虚线分割）
+                if (subGroup !== '_direct_') {
+                    html += `<div class="cart-sub-header">${subGroup}</div>`;
+                }
+                
+                // 渲染具体商品内容
+                items.forEach(({ id, qty, item }) => {
+                    const itemTotal = item.price * qty;
+                    total += itemTotal;
+                    const maxLabel = qty >= (item.maxQty || Infinity) ? ' MAX' : '';
+                    compactData.push(`${id}:${qty}`);
 
-            return `
-                <div class="cart-item item">
-                    <div class="item-name">
-                        <strong>${item.name}</strong> <br>
-                        <span class="cart-item-detail">¥${item.price} × ${qty}${maxLabel}</span>
+                    html += `
+                    <div class="cart-item item">
+                        <div class="item-name">
+                            ${item.name} <br>
+                            <span class="cart-item-detail">¥${item.price} × ${qty}${maxLabel}</span>
+                        </div>
+                        <div class="cart-item-actions">
+                            <strong class="item-price cart-item-total">¥${itemTotal}</strong>
+                            <button class="btn btn-danger" onclick="removeFromCart('${id}')">REMOVE</button>
+                        </div>
                     </div>
-                    <div class="cart-item-actions">
-                        <strong class="item-price cart-item-total">¥${itemTotal}</strong>
-                        <button class="btn btn-danger" onclick="removeFromCart('${id}')">REMOVE</button>
-                    </div>
-                </div>
-            `;
-        }).join('');
+                    `;
+                });
+            }
+        }
 
         getEl('cartContainer').innerHTML = html;
         getEl('totalPrice').innerText = `TOTAL: ¥${total.toLocaleString()}`;
@@ -355,16 +496,41 @@
     // 7. 初始化运行
     window.onload = async () => {
         try {
-            // 请求同目录下的 catalog.json 文件
-            const response = await fetch('./catalog.json');
+            // 加入 ?t= 时间戳，防止 GitHub Pages 导致 JSON 被浏览器死缓存
+            const response = await fetch('./catalog.json?t=' + Date.now());
             if (!response.ok) throw new Error('Network response was not ok');
             
-            catalogData = await response.json();
+            const flatData = await response.json();
             
-            // 数据加载完成后，构建 Map
-            itemMap = Object.fromEntries(
-                catalogData.flatMap(group => group.items.map(item => [item.id, item]))
-            );
+            // 自动将扁平的数据结构按 group/subgroup 归类为树状，并构建映射 Map
+            const groupedMap = new Map();
+            
+            flatData.forEach((item, index) => {
+                item.sortIndex = index;
+                itemMap[item.id] = item;
+                
+                const gName = item.group || "未分类";
+                const sName = item.subgroup;
+                
+                if (!groupedMap.has(gName)) {
+                    groupedMap.set(gName, { groupName: gName, items: [], subgroups: [] });
+                }
+                
+                const groupObj = groupedMap.get(gName);
+                
+                if (sName) {
+                    let subObj = groupObj.subgroups.find(s => s.subgroupName === sName);
+                    if (!subObj) {
+                        subObj = { subgroupName: sName, items: [] };
+                        groupObj.subgroups.push(subObj);
+                    }
+                    subObj.items.push(item);
+                } else {
+                    groupObj.items.push(item);
+                }
+            });
+            
+            catalogData = Array.from(groupedMap.values());
             
             // 渲染左侧列表
             renderCatalog();

@@ -1,43 +1,73 @@
 [
-        {
-        "groupName": "[新! 1.2新增]",
-        "items": [
-            { "id": "n1", "name": "[剧情主线] 再引来春系列", "price": 20, "maxQty": 1 },
-            { "id": "n2", "name": "[剧情支线] 分忧解难", "price": 15, "maxQty": 1 },
-            { "id": "n3", "name": "[收集] 试验园区地图探索", "price": 40, "maxQty": 1 },
-            { "id": "n4", "name": "[电线] 试验园区拉线", "price": 10, "maxQty": 1 },
-            { "id": "n5", "name": "[滑索] 试验园区滑索 金材料点 送货滑索", "price": 15, "maxQty": 1 },
-            { "id": "n6", "name": "[基建] 进度需1.2毕业(具体看账号进度)", "price": 5, "maxQty": 1 }
-        ]
-    },
-    {
-        "groupName": "[日常 / Month]",
-        "items": [
-            { "id": "r1", "name": "[托管小托] 日常任务+周常任务+帝江收菜+倒货+调度商店+环境监测+清信用点商店+清理智", "price": 60, "maxQty": 12 },
-            { "id": "r2", "name": "[托管大托] <小托>全部内容+送货(需武陵滑索)+限时活动保证不亏玉", "price": 80, "maxQty": 12 }
-        ]
-    },
-    {
-        "groupName": "[常驻活动]",
-        "items": [
-            { "id": "c1", "name": "[蚀像寻遗] 满刻度 全宝箱收集 全清任务 ", "price": 100, "maxQty": 1 },
-            { "id": "c2", "name": "[秘境行者] 1期每关", "price": 3, "maxQty": 9 },
-            { "id": "c3", "name": "[秘境行者] 2期每关", "price": 5, "maxQty": 6 }
-        ]
-    },
-        {
-        "groupName": "[基建]",
-        "items": [
-            { "id": "j1", "name": "[电线] 四号谷地", "price": 58, "maxQty": 1 },
-            { "id": "j2", "name": "[电线] 武陵", "price": 58, "maxQty": 1 }
-        ]
-    },
-    {
-        "groupName": "[收集]",
-        "items": [
-            { "id": "s1", "name": "[收集] 四号谷地", "price": 178, "maxQty": 1 },
-            { "id": "s2", "name": "[收集] 武陵", "price": 228, "maxQty": 1 }
-        ]
-    }
+    { "id": "n1", "name": "再引来春系列", "price": 20, "maxQty": 1, "group": "新! 1.2新增", "subgroup": "剧情故事" },
+    { "id": "n2", "name": "分忧解难", "price": 15, "maxQty": 1, "group": "新! 1.2新增", "subgroup": "剧情故事" },
+    { "id": "n3", "name": "地图探索", "price": 40, "maxQty": 1, "group": "新! 1.2新增", "subgroup": "试验园区" },
+    { "id": "n4", "name": "拉线", "price": 10, "maxQty": 1, "group": "新! 1.2新增", "subgroup": "试验园区" },
+    { "id": "n5", "name": "滑索 金材料点 送货滑索", "price": 15, "maxQty": 1, "group": "新! 1.2新增", "subgroup": "试验园区" },
+    { "id": "n6", "name": "基建进度需1.2毕业 (具体看账号进度)", "price": 5, "maxQty": 1, "group": "新! 1.2新增" },
+
+    { "id": "r1", "name": "托管小托: 日常+周常+帝江收菜+倒货+调度+环境监测+信用点商店+清理智", "price": 60, "maxQty": 12, "group": "日常 / Month" },
+    { "id": "r2", "name": "托管大托: <小托>全部内容+送货(需武陵滑索)+限时活动保证不亏玉", "price": 80, "maxQty": 12, "group": "日常 / Month" },
+
+    { "id": "c2", "name": "1期每关", "price": 3, "maxQty": 9, "group": "常驻活动", "subgroup": "秘境行者系列" },
+    { "id": "c3", "name": "2期每关", "price": 5, "maxQty": 6, "group": "常驻活动", "subgroup": "秘境行者系列" },
+    { "id": "c1", "name": "蚀像寻遗: 满刻度 全宝箱收集 全清任务", "price": 100, "maxQty": 1, "group": "常驻活动" },
+
+    { "id": "s1", "name": "四号谷地", "price": 178, "maxQty": 1, "group": "大世界探索", "subgroup": "收集系列" },
+    { "id": "s2", "name": "武陵", "price": 228, "maxQty": 1, "group": "大世界探索", "subgroup": "收集系列" },
+    { "id": "j1", "name": "四号谷地", "price": 58, "maxQty": 1, "group": "大世界探索", "subgroup": "基建系列 (拉电线)" },
+    { "id": "j2", "name": "武陵", "price": 58, "maxQty": 1, "group": "大世界探索", "subgroup": "基建系列 (拉电线)" },
     
+    { "id": "um1", "name": "驰援采石场系列（开图任务，还包括修复大兴起重机，深层管理区救援）", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um2", "name": "无色印记系列（2天）", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um3", "name": "帮人帮到底", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um4", "name": "希望与代价", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um5", "name": "再访基地系列（还包括重振士气，流言蜚语，使命虽小，再访问基地终）", "price": 8, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um6", "name": "稼穑不易", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um7", "name": "环带来客（2天）", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um8", "name": "紧急求助", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um9", "name": "晚安大树系列（2天）", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um10", "name": "商路难走系列（还包括生意难做，好人难寻）（2天）", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um11", "name": "机器人之梦", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um12", "name": "内部敌人（2天）", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um13", "name": "科学兴农", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um14", "name": "驮兽与我", "price": 8, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um15", "name": "虫不语系列", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um16", "name": "泉中客系列", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um17", "name": "夺宝奇兵系列", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um18", "name": "重逢故人", "price": 8, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um19", "name": "同袍系列（3天）", "price": 15, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um20", "name": "重要的街角（3天）", "price": 15, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um21", "name": "老人与潮（2天）", "price": 10, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+    { "id": "um22", "name": "再引春来系列（开图）", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "重要任务" },
+
+    { "id": "im1", "name": "风雨欲来系列", "price": 15, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im2", "name": "机械救星系列(还包括三脚架之家)", "price": 15, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im3", "name": "职责所在", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im4", "name": "尘封归档", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im5", "name": "爆破救援（需要爆炸物）", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im6", "name": "照常升起", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im7", "name": "幻觉", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im8", "name": "高空救援", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im9", "name": "维修总动员", "price": 8, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im10", "name": "漏网之虫", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im11", "name": "古董无人机", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im12", "name": "消失的爱人", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im13", "name": "追逐的脚步", "price": 8, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im14", "name": "钟鸣三到（需要 1000 息壤）", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im15", "name": "出师三剑", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im16", "name": "检修无小事", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im17", "name": "水中诡事", "price": 8, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im18", "name": "安桩不易", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im19", "name": "池中宝（需抽水）", "price": 15, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im20", "name": "侵蚀中的呼救", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im21", "name": "粉丝见面会", "price": 5, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im22", "name": "致后来人", "price": 3, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+    { "id": "im23", "name": "分忧解难（需抽水）", "price": 15, "maxQty": 1, "group": "剧情任务", "subgroup": "次要任务" },
+
+    { "id": "om1", "name": "离群之狼", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "角色故事" },
+    { "id": "om2", "name": "爱呐喊和原型机", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "角色故事" },
+    { "id": "om3", "name": "追忆之痕（比较长）", "price": 25, "maxQty": 1, "group": "剧情任务", "subgroup": "角色故事" },
+    { "id": "om4", "name": "信使的信", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "角色故事" },
+    { "id": "om5", "name": "红骑士", "price": 20, "maxQty": 1, "group": "剧情任务", "subgroup": "角色故事" }
 ]
