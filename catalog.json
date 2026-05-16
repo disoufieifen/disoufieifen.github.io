@@ -26,72 +26,8 @@
   {
     "category": "日常 / Month",
     "children": [
-      { "id": "r1", "name": "托管小托: 日常+周常+帝江收菜+倒货+调度+环境监测+信用点商店+清理智", "price": 60, "maxQty": 12 },
-      { "id": "r2", "name": "托管大托: <小托>全部内容+送货(需武陵滑索)+限时活动保证不亏玉", "price": 80, "maxQty": 12 }
-    ]
-  },
-  {
-    "category": "常驻活动",
-    "children": [
-      { "id": "xy1", "name": "蚀像寻遗: 满刻度 全宝箱收集 全清任务", "price": 100, "maxQty": 1 },
-      { "id": "xy2", "name": "蚀像寻遗: 仅满刻度 全清任务", "price": 60, "maxQty": 1 },
-      { "id": "fb0", "name": "影拓丰碑: 三期全清", "price": 60, "maxQty": 1 },
-      {
-        "subCategory": "影拓丰碑 - 大地的弃子",
-        "items": [
-          { "id": "fb01", "name": "毒雾求生", "price": 4, "maxQty": 1 },
-          { "id": "fb02", "name": "旁门外道", "price": 4, "maxQty": 1 },
-          { "id": "fb03", "name": "弩斧相应", "price": 4, "maxQty": 1 }
-        ]
-      },
-      {
-        "subCategory": "影拓丰碑 - 无机造物",
-        "items": [
-          { "id": "fb11", "name": "矢影环伺", "price": 4, "maxQty": 1 },
-          { "id": "fb12", "name": "狂冲盾止", "price": 4, "maxQty": 1 },
-          { "id": "fb13", "name": "安于磐石", "price": 4, "maxQty": 1 }
-        ]
-      },
-      {
-        "subCategory": "影拓丰碑 - 灼痛疤痕",
-        "items": [
-          { "id": "fb21", "name": "怨憎雾海", "price": 4, "maxQty": 1 },
-          { "id": "fb22", "name": "血肉熔点", "price": 4, "maxQty": 1 },
-          { "id": "fb23", "name": "呼吼炽焰", "price": 4, "maxQty": 1 }
-        ]
-      },
-      {
-        "subCategory": "影拓丰碑 - 浊流具现",
-        "items": [
-          { "id": "fb31", "name": "沉寂视界", "price": 4, "maxQty": 1 },
-          { "id": "fb32", "name": "枯竭海退", "price": 4, "maxQty": 1 },
-          { "id": "fb33", "name": "潮涌遗恨", "price": 4, "maxQty": 1 },
-          { "id": "fb34", "name": "污浊血脉", "price": 4, "maxQty": 1 },
-          { "id": "fb35", "name": "潜流绝窟", "price": 4, "maxQty": 1 },
-          { "id": "fb36", "name": "霜冻联结", "price": 4, "maxQty": 1 }
-        ]
-      }
-    ]
-  },
-  {
-    "category": "大世界探索",
-    "children": [
-      {
-        "subCategory": "收集系列",
-        "expand": true,
-        "items": [
-          { "id": "s1", "name": "四号谷地", "price": 178, "maxQty": 1 },
-          { "id": "s2", "name": "武陵", "price": 228, "maxQty": 1 }
-        ]
-      },
-      {
-        "subCategory": "基建系列 (拉电线)",
-        "expand": true,
-        "items": [
-          { "id": "j1", "name": "四号谷地", "price": 58, "maxQty": 1 },
-          { "id": "j2", "name": "武陵", "price": 58, "maxQty": 1 }
-        ]
-      }
+      { "id": "r1", "name": "?", "price": 0, "maxQty": 12 },
+      { "id": "r2", "name": "?", "price": 0, "maxQty": 12 }
     ]
   },
   {
@@ -163,6 +99,141 @@
           { "id": "om3", "name": "追忆之痕（比较长）", "price": 25, "maxQty": 1 },
           { "id": "om4", "name": "信使的信", "price": 20, "maxQty": 1 },
           { "id": "om5", "name": "红骑士", "price": 20, "maxQty": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "常驻活动",
+    "children": [
+      { "id": "xy1", "name": "蚀像寻遗: 满刻度 全宝箱收集 全清任务", "price": 100, "maxQty": 1 },
+      { "id": "xy2", "name": "蚀像寻遗: 仅满刻度 全清任务", "price": 60, "maxQty": 1 },
+      {
+        "subCategory": "蚀像寻遗",
+        "items": [
+          { "id": "xy01", "name": "1-3区", "price": 45, "maxQty": 1 },
+          { "id": "xy02", "name": "4 区", "price": 15, "maxQty": 1 },
+          { "id": "xy03", "name": "5-6区", "price": 40, "maxQty": 1 }
+        ]
+      },
+
+      { "id": "mj0", "name": "密境行者：两期全清 包镀层", "price": 55, "maxQty": 1 },
+      {
+        "subCategory": "密境行者 - 密境初显 3cny/stage",
+        "items": [
+          { "id": "mj01", "name": "压力感应", "price": 3, "maxQty": 1 },
+          { "id": "mj02", "name": "吊装辅助", "price": 3, "maxQty": 1 },
+          { "id": "mj03", "name": "乘风", "price": 3, "maxQty": 1 },
+          { "id": "mj04", "name": "工业化迷宫", "price": 3, "maxQty": 1 },
+          { "id": "mj05", "name": "高热拦截", "price": 3, "maxQty": 1 },
+          { "id": "mj06", "name": "外部起爆", "price": 3, "maxQty": 1 },
+          { "id": "mj07", "name": "长耳兽的邀请", "price": 3, "maxQty": 1 },
+          { "id": "mj08", "name": "轰鸣喜乐", "price": 3, "maxQty": 1 },
+          { "id": "mj09", "name": "游于光焰", "price": 3, "maxQty": 1 }
+        ]
+      },
+      {
+        "subCategory": "密境行者 - 行探险窟 5cny/stage",
+        "items": [
+          { "id": "mj11", "name": "驱水行路", "price": 5, "maxQty": 1 },
+          { "id": "mj12", "name": "需水阵列", "price": 5, "maxQty": 1 },
+          { "id": "mj13", "name": "转轮与桥梁", "price": 5, "maxQty": 1 },
+          { "id": "mj14", "name": "秋水横渡", "price": 5, "maxQty": 1 },
+          { "id": "mj15", "name": "归家", "price": 5, "maxQty": 1 },
+          { "id": "mj16", "name": "小虫之旅", "price": 5, "maxQty": 1 }
+        ]
+      },
+      { "id": "fb0", "name": "影拓丰碑: 三期全清", "price": 60, "maxQty": 1 },
+      {
+        "subCategory": "影拓丰碑 - 大地的弃子",
+        "items": [
+          { "id": "fb01", "name": "毒雾求生", "price": 4, "maxQty": 1 },
+          { "id": "fb02", "name": "旁门外道", "price": 4, "maxQty": 1 },
+          { "id": "fb03", "name": "弩斧相应", "price": 4, "maxQty": 1 }
+        ]
+      },
+      {
+        "subCategory": "影拓丰碑 - 无机造物",
+        "items": [
+          { "id": "fb11", "name": "矢影环伺", "price": 4, "maxQty": 1 },
+          { "id": "fb12", "name": "狂冲盾止", "price": 4, "maxQty": 1 },
+          { "id": "fb13", "name": "安于磐石", "price": 4, "maxQty": 1 }
+        ]
+      },
+      {
+        "subCategory": "影拓丰碑 - 灼痛疤痕",
+        "items": [
+          { "id": "fb21", "name": "怨憎雾海", "price": 4, "maxQty": 1 },
+          { "id": "fb22", "name": "血肉熔点", "price": 4, "maxQty": 1 },
+          { "id": "fb23", "name": "呼吼炽焰", "price": 4, "maxQty": 1 }
+        ]
+      },
+      {
+        "subCategory": "影拓丰碑 - 浊流具现",
+        "items": [
+          { "id": "fb31", "name": "沉寂视界", "price": 4, "maxQty": 1 },
+          { "id": "fb32", "name": "枯竭海退", "price": 4, "maxQty": 1 },
+          { "id": "fb33", "name": "潮涌遗恨", "price": 4, "maxQty": 1 },
+          { "id": "fb34", "name": "污浊血脉", "price": 4, "maxQty": 1 },
+          { "id": "fb35", "name": "潜流绝窟", "price": 4, "maxQty": 1 },
+          { "id": "fb36", "name": "霜冻联结", "price": 4, "maxQty": 1 }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "大世界探索",
+    "children": [
+      { "id": "sj0", "name": "四号谷地 Basic Plan", "price": 178, "maxQty": 1 },
+      {
+        "subCategory": "基础探索 包括宝箱,谜质,采录桩,[大情报],机器人",
+        "expand": true,
+        "items": [
+          { "id": "sj01", "name": "谷地通道", "price": 10, "maxQty": 1 },
+          { "id": "sj02", "name": "枢纽区", "price": 60, "maxQty": 1 },
+          { "id": "sj03", "name": "采石场", "price": 20, "maxQty": 1 },
+          { "id": "sj04", "name": "源石研究园", "price": 30, "maxQty": 1 },
+          { "id": "sj05", "name": "矿脉源区", "price": 40, "maxQty": 1 },
+          { "id": "sj06", "name": "供能高地", "price": 25, "maxQty": 1 }
+        ]
+      },
+      { "id": "sj1", "name": "武陵 Basic Plan", "price": 228, "maxQty": 1 },
+      {
+        "subCategory": "基础探索 包括宝箱,谜质,采录桩,[大情报],机器人",
+        "expand": true,
+        "items": [
+          { "id": "sj11", "name": "武陵城", "price": 90, "maxQty": 1 },
+          { "id": "sj12", "name": "景玉谷", "price": 35, "maxQty": 1 },
+          { "id": "sj13", "name": "清波寨", "price": 35, "maxQty": 1 },
+          { "id": "sj14", "name": "首墩", "price": 40, "maxQty": 1 },
+          { "id": "sj15", "name": "武陵城新区域", "price": 10, "maxQty": 1 },
+          { "id": "sj16", "name": "试验园区", "price": 30, "maxQty": 1 }
+        ]
+      },
+      { "id": "sj2", "name": "四号谷地 Ultimate Plan", "price": 258, "maxQty": 1 },
+      {
+        "subCategory": "终极探索 包括宝箱,谜质,采录桩,大情报,[小情报],机器人,[采集点]",
+        "expand": true,
+        "items": [
+          { "id": "sj21", "name": "谷地通道", "price": 20, "maxQty": 1 },
+          { "id": "sj22", "name": "枢纽区", "price": 80, "maxQty": 1 },
+          { "id": "sj23", "name": "采石场", "price": 30, "maxQty": 1 },
+          { "id": "sj24", "name": "源石研究园", "price": 45, "maxQty": 1 },
+          { "id": "sj25", "name": "矿脉源区", "price": 55, "maxQty": 1 },
+          { "id": "sj26", "name": "供能高地", "price": 40, "maxQty": 1 }
+        ]
+      },
+      { "id": "sj3", "name": "武陵 Ultimate Plan", "price": 318, "maxQty": 1 },
+      {
+        "subCategory": "终极探索 包括宝箱,谜质,采录桩,大情报,[小情报],机器人,[采集点]",
+        "expand": true,
+        "items": [
+          { "id": "sj31", "name": "武陵城", "price": 130, "maxQty": 1 },
+          { "id": "sj32", "name": "景玉谷", "price": 45, "maxQty": 1 },
+          { "id": "sj33", "name": "清波寨", "price": 45, "maxQty": 1 },
+          { "id": "sj34", "name": "首墩", "price": 50, "maxQty": 1 },
+          { "id": "sj35", "name": "武陵城新区域", "price": 15, "maxQty": 1 },
+          { "id": "sj36", "name": "试验园区", "price": 40, "maxQty": 1 }
         ]
       }
     ]
