@@ -15,7 +15,7 @@
         "subCategory": "试验园区",
         "expand": true,
         "items": [
-          { "id": "n3", "name": "地图探索", "price": 40, "maxQty": 1 },
+          { "id": "n3", "name": "地图全收集", "price": 40, "maxQty": 1 },
           { "id": "n4", "name": "拉线", "price": 10, "maxQty": 1 },
           { "id": "n5", "name": "滑索 金材料点 送货滑索", "price": 15, "maxQty": 1 }
         ]
